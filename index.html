@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather Forecast App</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f0f8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            padding: 20px;
+            width: 80%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .search-container {
+            margin: 20px 0;
+        }
+        input {
+            padding: 10px;
+            width: 70%;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-left: 10px;
+        }
+        .loading, .result {
+            margin-top: 20px;
+            display: none;
+        }
+        .step {
+            margin: 10px 0;
+            font-size: 18px;
+        }
+        .final-message {
+            font-size: 24px;
+            font-weight: bold;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Super Accurate Weather Forecast</h1>
+        
+        <div class="search-container">
+            <input type="text" id="location" placeholder="Enter your location">
+            <button onclick="getWeather()">Search</button>
+        </div>
+        
+        <div id="loading" class="loading">
+            <div class="step" id="step1">Give me a minute...</div>
+            <div class="step" id="step2" style="display: none;">Going outside...</div>
+            <div class="result" id="result">
+                <div class="final-message">idk just go look outside your window</div>
+                <button onclick="resetApp()">Try Another Location</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function getWeather() {
+            const location = document.getElementById('location').value;
+            if (!location) {
+                alert("Please enter a location");
+                return;
+            }
+            
+            // Show loading sequence
+            document.getElementById('loading').style.display = 'block';
+            
+            // First message
+            setTimeout(() => {
+                // Show second message after 2 seconds
+                document.getElementById('step2').style.display = 'block';
+                
+                // Show result after another 2 seconds
+                setTimeout(() => {
+                    document.getElementById('result').style.display = 'block';
+                }, 2000);
+            }, 2000);
+        }
+        
+        function resetApp() {
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('step2').style.display = 'none';
+            document.getElementById('result').style.display = 'none';
+            document.getElementById('location').value = '';
+        }
+    </script>
+</body>
+</html>
